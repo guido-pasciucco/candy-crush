@@ -9,6 +9,9 @@ let otherTile;
 
 window.onload = () => {
     startGame();
+    window.setInterval(() => {
+        crushCandy();
+    }, 100)
 }
 
 const randomCandy = () => {
@@ -34,8 +37,6 @@ const startGame = () => {
         board.push(row);
     }
 }
-
-// este commit : added a drag and drop functionality
 
 const dragStart = () => currTile = this;
 const dragDrop = () => otherTile = this;
@@ -64,3 +65,60 @@ const dragEnd = () => {
         otherTile.src = currImg;
     }
 }
+
+const crushCandy = () =>{
+    // crushFive();
+    // crushFour();
+    crushThree();
+}
+
+const crushThree = () =>{
+    // check rows
+    for (let r = 0 ; r < rows ; r++){
+        for (let c = 0 ; c < columns-2 ; c++){
+            let candy1 = board[r][c];
+            let candy2 = board[r][c+1];
+            let candy3 = board[r][c+2];
+            if (candy1.src == candy2.src && candy2.src == candy3.src && !candy1.src.includes("blank")){
+                candy1.src = "./images/blank.png";
+                candy2.src = "./images/blank.png";
+                candy3.src = "./images/blank.png";
+            }
+        }
+    }    
+    // check columns
+    for (let c = 0; c < columns; c++){
+        for (let r = 0 ; r < rows; r++){
+            let candy1 = board[r][c];
+            let candy2 = board[r+1][c];
+            let candy3 = board[r+2][c];
+            if (candy1.src == candy2.src && candy2.src == candy3.src && !candy1.src.includes("blank")){
+                candy1.src = "./images/blank.png";
+                candy2.src = "./images/blank.png";
+                candy3.src = "./images/blank.png";
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
